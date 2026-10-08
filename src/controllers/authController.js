@@ -33,6 +33,7 @@ exports.login = asyncHandler(async (req, res) => {
   if (!user || !(await user.comparePassword(password))) {
     throw new ApiError(401, "Email ou mot de passe incorrect");
   }
+  if (!user.territoryColor) await user.save();
   res.json({ success: true, token: signToken(user._id), user });
 });
 
@@ -81,6 +82,7 @@ exports.googleLogin = asyncHandler(async (req, res) => {
     });
   }
 
+  if (!user.territoryColor) await user.save();
   res.json({ success: true, token: signToken(user._id), user });
 });
 

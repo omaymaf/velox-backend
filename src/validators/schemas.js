@@ -20,6 +20,18 @@ const updateProfile = z.object({
 
 const setGps = z.object({ gpsGranted: z.boolean() });
 
+const gpsLocation = z.object({
+  latitude: z.number().min(30).max(37.6),
+  longitude: z.number().min(7.4).max(11.7),
+  accuracy: z.number().min(0).max(1000),
+  speed: z.number().min(0).nullable().optional(),
+  timestamp: z.number().int().positive(),
+});
+const coordinate = z.tuple([
+  z.number().min(30).max(37.6),
+  z.number().min(7.4).max(11.7),
+]);
+
 const createRide = z.object({
   title: z.string().min(1).max(120),
   subtitle: z.string().max(200).optional(),
@@ -38,6 +50,24 @@ const createRide = z.object({
   maxPowerW: z.number().min(0).max(2500).optional(),
   elevationM: z.number().min(0).max(20000).optional(),
   territoryId: z.string().optional(),
+  trackingId: z.string().regex(/^[a-f\d]{24}$/i).optional(),
+  routeCoordinates: z.array(coordinate).max(5000).optional(),
+});
+
+const startTerritoryTracking = z.object({
+  purpose: z.enum(['CREATE_TERRITORY', 'CONQUEST']),
+  location: gpsLocation,
+});
+const appendTerritoryLocations = z.object({
+  locations: z.array(gpsLocation).min(1).max(1000),
+});
+const createTerritory = z.object({
+  name: z.string().trim().min(2).max(50),
+  trackingId: z.string().regex(/^[a-f\d]{24}$/i),
+});
+const snapToRoads = z.object({
+  coordinates: z.array(coordinate).min(2).max(5000),
+  closeLoop: z.boolean().optional(),
 });
 
 const createPost = z.object({
@@ -65,6 +95,10 @@ module.exports = {
   updateProfile,
   setGps,
   createRide,
+  startTerritoryTracking,
+  appendTerritoryLocations,
+  createTerritory,
+  snapToRoads,
   createPost,
   coach,
   googleLogin,

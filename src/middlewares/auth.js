@@ -18,6 +18,7 @@ const protect = asyncHandler(async (req, _res, next) => {
 
   const user = await User.findById(payload.id);
   if (!user) throw new ApiError(401, 'Utilisateur introuvable');
+  if (!user.territoryColor) await user.save();
   req.user = user;
   next();
 });

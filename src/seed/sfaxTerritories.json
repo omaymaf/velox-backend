@@ -1,0 +1,226 @@
+[
+  {
+    "slug": "sfax-centre-bab-jebli",
+    "name": "Sfax Centre - Bab Jebli",
+    "ownerEmail": "clara@velox.app",
+    "creatorEmail": "clara@velox.app",
+    "status": "SECURED",
+    "controlPercent": 100,
+    "rewardXp": 220,
+    "defenseLevel": "Lvl 2 Shield",
+    "waypoints": [
+      {
+        "key": "bab-jebli",
+        "query": "Bab Jebli, Sfax, Tunisia",
+        "displayName": "باب الجبلي, Beb Jebli, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 9796924206
+      },
+      {
+        "key": "municipal-theatre",
+        "query": "Sfax Municipal Theatre, Tunisia",
+        "displayName": "المسرح البلدي بصفاقس, نهج فيكتور هوغو, باب بحر, معتمدية صفاقس المدينة, ولاية صفاقس, 3001, تونس",
+        "osmType": "way",
+        "osmId": 37551426
+      },
+      {
+        "key": "railway-station",
+        "query": "Sfax railway station, Tunisia",
+        "displayName": "صفاقس, نهج تازركة, باب بحر, معتمدية صفاقس المدينة, ولاية صفاقس, 3001, تونس",
+        "osmType": "node",
+        "osmId": 8231384585
+      },
+      {
+        "key": "route-de-tunis",
+        "query": "Route de Tunis, Sfax, Tunisia",
+        "displayName": "القباضة المالية طريق تونس صفاقس, نهج البشير صفر, حي المعارف, البساتين, معتمدية صفاقس المدينة, ولاية صفاقس, 3069, تونس",
+        "osmType": "node",
+        "osmId": 7227358163
+      },
+      {
+        "key": "bab-jebli",
+        "query": "Bab Jebli, Sfax, Tunisia",
+        "displayName": "باب الجبلي, Beb Jebli, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 9796924206
+      }
+    ],
+    "distanceKm": 6.057,
+    "polylines": [
+      "okegaAycuoSs[lUm@Rg@^]l@mK~MgG`I_XsWmHoGyL{LmHaJwEeJwCaHcAgDeCgJgAeEsB_D_NyNy@yD_@gETuFr@aEnAyExOyk@tKmRv@kA|CaFvJcOvFoLhEqOtAeNzAiVhAoHzAoDnBaCfEoDpt@aOtJcBz_@aI~[yGl{@aR`ATdDzL~EtNlApDvVbt@vBpG|GwDtBmAzTsM",
+      "ab_gaAaq}oSpj@c\\~BgAzTkU|f@em@iReXgSsVyQwW}QgVuO}S}@nA{^jd@sCuG?{A^cA??",
+      "cx_gaAqpcpS??_@bA?zArCtGmB~BeAvAgQpT}_@jd@e`@`d@qsE~`AmLzBgMn@ou@cHk^gD{VkDkY{DqKaAeIG{Mp@gHrAeHjBwH~BeIrCaJtDiCjAeDvCiAn@i]rN{SxIyRhI_d@vPkBr@_SpIqQ`IoUdJgOvGsUlJw_@nO}U`K}e@tRuDzAe@RaCLqLfE_DjA_IrDaFy@gBWeXwFuMmBcJ_AmVyCeI{@",
+      "cb_haAazxoSdIz@lVxCbJ~@tMlBdXvFfBV`Fx@jFv@fDd@hDn@dOnDxc@jKjc@tJlFvBx@\\pDjBbDjClCfDxB~DGlBRfBl@vA`AbA~@^`AJj@CvAc@~EyA`Cc@pRQfFLjGN~m@zB|Ep@nIfBtAnAhAd@nAPpAElA[fAo@r@y@lKBdHRfKz@jRl@hk@I~}@`@`KJlUf@r[YtD_@pFwApFoCbF{ExFsElCcArBs@lIK|LvMnCvCxCjBjDl@nDUx@_@~N`K`I`HtSrRbb@~b@nBjBrCpDnDlHjt@x`BCPnBnHdAtFd@hFOtAAtARvBn@jBdAtAvAz@z@Rz@FbBOzAq@lAoAt@eBVwAH{AQcCo@uBmA_B_B}@_BUsE{GwEiJyAeDiKyVyGaPqZiq@wDgIiD}FkCwCfGaI~GuB|Do@x@Nz@Gv@_@h@s@XcABkAOgAc@{@q@k@m@Q}@@r[mU"
+    ],
+    "routeSource": "VALHALLA_OSM_BICYCLE",
+    "sourceAttribution": "© OpenStreetMap contributors; routed by Valhalla"
+  },
+  {
+    "slug": "sfax-centre-bab-diwan",
+    "name": "Sfax Centre - Bab Diwan",
+    "ownerEmail": "thomas@velox.app",
+    "creatorEmail": "thomas@velox.app",
+    "status": "SECURED",
+    "controlPercent": 100,
+    "rewardXp": 200,
+    "defenseLevel": "Lvl 1 Shield",
+    "waypoints": [
+      {
+        "key": "bab-diwan",
+        "query": "Bab Diwan, Sfax, Tunisia",
+        "displayName": "باب الديوان, نهج الباي, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 5671145219
+      },
+      {
+        "key": "route-de-tunis",
+        "query": "Route de Tunis, Sfax, Tunisia",
+        "displayName": "القباضة المالية طريق تونس صفاقس, نهج البشير صفر, حي المعارف, البساتين, معتمدية صفاقس المدينة, ولاية صفاقس, 3069, تونس",
+        "osmType": "node",
+        "osmId": 7227358163
+      },
+      {
+        "key": "bab-jebli",
+        "query": "Bab Jebli, Sfax, Tunisia",
+        "displayName": "باب الجبلي, Beb Jebli, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 9796924206
+      },
+      {
+        "key": "railway-station",
+        "query": "Sfax railway station, Tunisia",
+        "displayName": "صفاقس, نهج تازركة, باب بحر, معتمدية صفاقس المدينة, ولاية صفاقس, 3001, تونس",
+        "osmType": "node",
+        "osmId": 8231384585
+      },
+      {
+        "key": "bab-diwan",
+        "query": "Bab Diwan, Sfax, Tunisia",
+        "displayName": "باب الديوان, نهج الباي, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 5671145219
+      }
+    ],
+    "distanceKm": 6.413,
+    "polylines": [
+      "sg`gaAep{oSoAuJNiCjAwBlHyD~HxUh@|AxCpIrG_EwCiIyPgi@eKsYqK_[iJ}WyAcE}CeIToA?_BYyAq@kAaAq@cASeADcA\\u@t@kEpBoFvBiLnEqsE~`AmLzBgMn@ou@cHk^gD{VkDkY{DqKaAeIG{Mp@gHrAeHjBwH~BeIrCaJtDiCjAeDvCiAn@i]rN{SxIyRhI_d@vPkBr@_SpIqQ`IoUdJgOvGsUlJw_@nO}U`K}e@tRuDzAe@RaCLqLfE_DjA_IrDaFy@gBWeXwFuMmBcJ_AmVyCeI{@",
+      "cb_haAazxoSdIz@lVxCbJ~@tMlBdXvFfBV`Fx@jFv@fDd@hDn@dOnDxc@jKjc@tJlFvBx@\\pDjBbDjClCfDxB~DGlBRfBl@vA`AbA~@^`AJj@CvAc@~EyA`Cc@pRQfFLjGN~m@zB|Ep@nIfBtAnAhAd@nAPpAElA[fAo@r@y@lKBdHRfKz@jRl@hk@I~}@`@`KJlUf@r[YtD_@pFwApFoCbF{ExFsElCcArBs@lIK|LvMnCvCxCjBjDl@nDUx@_@~N`K`I`HtSrRbb@~b@nBjBrCpDnDlHjt@x`BCPnBnHdAtFd@hFOtAAtARvBn@jBdAtAvAz@z@Rz@FbBOzAq@lAoAt@eBVwAH{AQcCo@uBmA_B_B}@_BUsE{GwEiJyAeDiKyVyGaPqZiq@wDgIiD}FkCwCfGaI~GuB|Do@x@Nz@Gv@_@h@s@XcABkAOgAc@{@q@k@m@Q}@@r[mU",
+      "okegaAycuoSs[lUm@Rg@^]l@mK~MgG`I_XsWmHoGyL{LmHaJwEeJwCaHcAgDeCgJgAeEsB_D_NyNy@yD_@gETuFr@aEnAyExOyk@tKmRv@kA|CaFvJcOvFoLhEqOtAeNzAiVhAoHzAoDnBaCfEoDpt@aOtJcBz_@aI~[yGl{@aR`ATdAE`A[t@s@h@cAToA`OmJbL_CnKsBlCg@dD[nK{BrFmB`EyAp@?l@Sd@c@Xm@Nw@?y@Io@Uk@]c@c@W]IsBaFeBoCqJaNbg@ul@uO}S}@nA{^jd@sCuG?{A^cA??",
+      "cx_gaAqpcpS??_@bA?zArCtGmB~BeAvAgQpT}_@jd@gA|Cm@jDUrD@rDu@t@g@jAStABxAZrAl@dA~@n@`ATdDzL~EtNlApDvVbt@vBpG|BtHxAxEmHxDkAvBOhCnAtJ"
+    ],
+    "routeSource": "VALHALLA_OSM_BICYCLE",
+    "sourceAttribution": "© OpenStreetMap contributors; routed by Valhalla"
+  },
+  {
+    "slug": "sfax-sud-el-ain",
+    "name": "Sfax Sud - El Ain",
+    "ownerEmail": null,
+    "creatorEmail": "marc@velox.app",
+    "status": "NEUTRAL",
+    "controlPercent": 0,
+    "rewardXp": 260,
+    "defenseLevel": "No Shield",
+    "waypoints": [
+      {
+        "key": "el-ain",
+        "query": "El Ain, Sfax, Tunisia",
+        "displayName": "العين, معتمدية صفاقس الجنوبية, ولاية صفاقس, تونس",
+        "osmType": "relation",
+        "osmId": 7147553
+      },
+      {
+        "key": "bab-jebli",
+        "query": "Bab Jebli, Sfax, Tunisia",
+        "displayName": "باب الجبلي, Beb Jebli, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 9796924206
+      },
+      {
+        "key": "municipal-theatre",
+        "query": "Sfax Municipal Theatre, Tunisia",
+        "displayName": "المسرح البلدي بصفاقس, نهج فيكتور هوغو, باب بحر, معتمدية صفاقس المدينة, ولاية صفاقس, 3001, تونس",
+        "osmType": "way",
+        "osmId": 37551426
+      },
+      {
+        "key": "railway-station",
+        "query": "Sfax railway station, Tunisia",
+        "displayName": "صفاقس, نهج تازركة, باب بحر, معتمدية صفاقس المدينة, ولاية صفاقس, 3001, تونس",
+        "osmType": "node",
+        "osmId": 8231384585
+      },
+      {
+        "key": "el-ain",
+        "query": "El Ain, Sfax, Tunisia",
+        "displayName": "العين, معتمدية صفاقس الجنوبية, ولاية صفاقس, تونس",
+        "osmType": "relation",
+        "osmId": 7147553
+      }
+    ],
+    "distanceKm": 18.242,
+    "polylines": [
+      "al`iaA{ktkSsXkm@kByFmMuYkGkRqM{]e@}BSyAoAqFiPyi@o@gDy@sEaD}TaAkHuJgu@_CuTiAyHyDiUyJ{d@yK}]yMqe@li@cWbCqAtCiB~BgBl@mB@}BBmDbA}CzVaRzFkDrg@s\\hB{BbBeDqFwE{\\si@{B{F}KgZkBgFs@kB}La_@aNca@kNs^uQqh@iDoJ|FkFvUuTf]_[bTuQpTsSfMcMjJmKpLgOnGaJvJyNpEoGdCyD|SsZnSkZdEoG|GsMfFqKzJeV`IgStg@guAfMa]rAwDjGkPbN{WdJaRxJcQrLoStLeRrMcS~LyPv_@ef@d\\mc@bV_ZdTyWnTgXjLqNxg@_l@fPuOpT_TfNeMtOyLtLaIdLuHpKoFda@yT``@cSdRiKpPoKbGiFzEyE|GgI|HgL|i@oy@vQaZbJwPhR_a@xJ{SzIgSrJ}SjX{m@dLmVpLmUbXgg@rLmSfMeVb_@cu@`EsEjFiKbGoLnCmFlCkDpBsAfC}@t@K`AMhBiAnAqBh@kC?sC[cBZqD`@uCz@}CfGmOtEuNbF_Ltb@c_AzUcg@na@g{@hLeWdFePdJ}[lIe\\r[wsArDuNtOkg@tRcm@~Oke@rMmb@~EgN`T{m@vFsOvKeZ|KmZdFgNdJuV~AsEjJaX`GsQzEyLjBoEjBsF|BqFjAaEnCcH~Syf@pSsb@pWsk@`FwLpJsWdByFtQki@fIeYbW_w@pTyn@nDoJv@eClRyj@nOud@xFqOjBgFtIiSdHwJpB{CtCqCbGkFz@SpAu@`AmAl@_BTyAB}AK{AfKmKlDgDdIuGdLoIpv@ao@zi@}c@nSsP`O{LtMmKdO}L`OyL|F{EbCiBbCuAbDiAnD_Az@Rz@FbBOzAq@lAoAt@eBVwAH{AQcCo@uBmA_B_B}@_BUsE{GwEiJyAeDiKyVyGaPqZiq@wDgIiD}FkCwCfGaI~GuB|Do@x@Nz@Gv@_@h@s@XcABkAOgAc@{@q@k@m@Q}@@r[mU",
+      "okegaAycuoSs[lUm@Rg@^]l@mK~MgG`I_XsWmHoGyL{LmHaJwEeJwCaHcAgDeCgJgAeEsB_D_NyNy@yD_@gETuFr@aEnAyExOyk@tKmRv@kA|CaFvJcOvFoLhEqOtAeNzAiVhAoHzAoDnBaCfEoDpt@aOtJcBz_@aI~[yGl{@aR`ATdDzL~EtNlApDvVbt@vBpG|GwDtBmAzTsM",
+      "ab_gaAaq}oSpj@c\\~BgAzTkU|f@em@iReXgSsVyQwW}QgVuO}S}@nA{^jd@sCuG?{A^cA??",
+      "cx_gaAqpcpS??_@bA?zArCtGmB~BeAvAgQpT}_@jd@gA|Cm@jDUrD@rDu@t@g@jAStABxAZrAl@dA~@n@`ATdDzL~EtNlApDvVbt@vBpG|BtHxAxE~HxUh@|AxCpI|GfT~Yvx@zR|k@n@hCzIv`@dAzHFp@zB`T\\pEZ~ERzIIzDGhEApFkAl@_AdAm@xAUdB?~AT|Af@rAv@bAbAn@lAVd@tNRnPRpd@E|Rk@jWgAr\\yD`n@iDtc@iCr[yBfYg@|Hu@zJcBdUaCnViDf^}Dte@eBf@mA~@y@vAi@jC@rCeD~HuA`EiB|DaDdF}IrM_KxNsLhOkN~QqMrRoDpE}BvBaIpIcC`C_BVwAn@mAdA_AzAs@zBUhCFjCFj@cDlBsBdCeCzDyGfLeEdKwM~Q{@xAwm@lz@wa@jm@iCjEmFfI{E~KmI|UiYb`AuNhe@iDnLeC~I_EvMyJ|[aF`P{IzX_Mt`@cL~[oPbb@_GzTqGrTkIpWYv@eGxQwAxFaHrWkBrGkAlE{FlT{Sbx@}Nnk@eF~R_Ih[wDbOgYtgAwKnc@wN`i@oMz`@{Qzk@iOld@e]fbAk@tAy]~bAsShm@eB~EaM`_@yFvPqEtFsChDcDpC{DtCoAHmA`@cAt@w@hAe@tAU`B?`BP`Bb@vAKvFa@rFs@nFgAfFwGvO_MrYyNh^aEhK}@vBgF~NwFdRmJh`@cJhd@sKxh@wRjm@}I|S{EpLcGbL{Rz\\oNzS{Xj]oP`UmLzOyOtViNzUwQv]gOn[y[zx@iLvYcJdUmGxOcItV_CtGsWzt@ux@peCkMhe@mExIoFdIiE|Fe@H{@^q@r@c@bAQlA@nABXDTgAfJm@xGm@bG_BxJkJjXaW`r@_CzGgEnPyE`RiDpPyF`ZkInc@_I`a@eC`NmHx_@gF`VkEhPkKp\\wS|n@wKn\\uG`S_Oxb@oe@fzA_BvEeDnIoFjMgNvYc^nt@kWrh@}Zhn@{Rxa@oEuI{DyIyMc[sQma@uDoI}c@`b@sD~DwCjCqJzFiJdDkG|BkA`@_o@`XqIfDgz@t_@z@rCeDjC{f@`_@yc@fc@s`@|[_SzOwm@ha@qQfJyCxAaBoDaGsM"
+    ],
+    "routeSource": "VALHALLA_OSM_BICYCLE",
+    "sourceAttribution": "© OpenStreetMap contributors; routed by Valhalla"
+  },
+  {
+    "slug": "sfax-est-sakiet-ezzit",
+    "name": "Sfax Est - Sakiet Ezzit",
+    "ownerEmail": null,
+    "creatorEmail": "alex@velox.app",
+    "status": "NEUTRAL",
+    "controlPercent": 0,
+    "rewardXp": 280,
+    "defenseLevel": "No Shield",
+    "waypoints": [
+      {
+        "key": "sakiet-ezzit",
+        "query": "Sakiet Ezzit, Sfax, Tunisia",
+        "displayName": "ساقية الزيت, معتمدية ساقية الزيت, ولاية صفاقس, 3021, تونس",
+        "osmType": "node",
+        "osmId": 479938480
+      },
+      {
+        "key": "route-de-tunis",
+        "query": "Route de Tunis, Sfax, Tunisia",
+        "displayName": "القباضة المالية طريق تونس صفاقس, نهج البشير صفر, حي المعارف, البساتين, معتمدية صفاقس المدينة, ولاية صفاقس, 3069, تونس",
+        "osmType": "node",
+        "osmId": 7227358163
+      },
+      {
+        "key": "bab-diwan",
+        "query": "Bab Diwan, Sfax, Tunisia",
+        "displayName": "باب الديوان, نهج الباي, صفاقس الجديدة, صفاقس, المدينة, معتمدية صفاقس المدينة, ولاية صفاقس, 3000, تونس",
+        "osmType": "node",
+        "osmId": 5671145219
+      },
+      {
+        "key": "railway-station",
+        "query": "Sfax railway station, Tunisia",
+        "displayName": "صفاقس, نهج تازركة, باب بحر, معتمدية صفاقس المدينة, ولاية صفاقس, 3001, تونس",
+        "osmType": "node",
+        "osmId": 8231384585
+      },
+      {
+        "key": "sakiet-ezzit",
+        "query": "Sakiet Ezzit, Sfax, Tunisia",
+        "displayName": "ساقية الزيت, معتمدية ساقية الزيت, ولاية صفاقس, 3021, تونس",
+        "osmType": "node",
+        "osmId": 479938480
+      }
+    ],
+    "distanceKm": 16.484,
+    "polylines": [
+      "ukdkaAscyoSnIXnR`A~\\|B`j@rCpZnA`]vBxKfAxPhArZ~AlYxA``@hBvId@`\\jB`PdAvV|A`Mh@d_@tA~UfArc@nC|b@hB|m@fDxa@pBjl@fCdl@~A`p@jA`bAn@vCFtwAqAbkA_BjVa@rh@o@rAC|x@cAnO[`Xi@zf@}@fi@iApz@q@js@qB~r@uBdk@wCpNu@z[mBzMk@hkA}Fxh@_C`u@_EjTsA~f@sBfNi@vGYbHGrE?lINpIL|J^bRjAjIl@bNxA|F`A~LDpGbAnH|C|@z@fAd@lAPnAGhA]bAq@x@iAfH_C~DeBfLkD|O{AfC]`C]`Gy@v]wDbZ}D~PaCxh@{Ere@}Fzp@kGj|@kI`^kDpq@uHnp@wFrHu@bs@{GtCYh]aDfb@eEpRkB|N}@zWFjgAr@tQb@lPAzb@wAxNe@fd@eBtSu@fJ?hIVnUnA~TdBnJx@jN~@rVnCtGx@`Dl@pg@fJdn@fLpFx@tItAdN`CfEx@fDj@jFfAdbA~RhJxAzWrBbZrEnCTp]~DrWzC|I|@fPfB",
+      "cb_haAazxoSdIz@lVxCbJ~@tMlBdXvFfBV`Fx@jFv@bC{A~PyHbBwBd@StD{A|e@uR|UaKv_@oOrUmJfOwGnUeJpQaI~RqIjBs@~c@wPxRiIzSyIh]sNhAo@~EoAnCiAbJ}C~Q_GrHqBlHoAnU}@jRjBrShC`QfCrYfE|c@lGjZtDbHCfIu@zVwEtf@}Kpt@aOtJcBz_@aI~[yGl{@aR`ATdDzL~EtNlApDvVbt@vBpG|BtHxAxEmHxDkAvBOhCnAtJ",
+      "sg`gaAep{oSoAuJNiCjAwBlHyD~HxUh@|AxCpIrG_EwCiIyPgi@tBmAl`Awj@~BgAzTkU|f@em@iReXgSsVyQwW}QgVuO}S}@nA{^jd@sCuG?{A^cA??",
+      "cx_gaAqpcpS??_@bA?zArCtGmB~BeAvAgQpT}_@jd@e`@`d@qsE~`AmLzBgMn@ou@cHk^gD{VkDkY{DqKaAeIG{Mp@gHrAeHjBwH~BeIrCaJtD{ScVkHgIsS}RaCiCuBkCmAuAqIaKgMcO_C}A}FeCaLwDgM{CaUaEaH{DeTqEaG}@oDy@gJmCk`@eIwLCcM_CgNeC}N_D{JaCkKb@eGJeLYwW{A_X_CqMaAeOq@yHMgEAqDEeJ?uIJiU`@gTz@sI\\cKt@iK|@oJbAsShDwMdCoMnCwV~Gua@tK_GjAcLjBer@zSqM~E}I`CsZlGw\\`L_W~DqVdHqPdEuXzGkh@tNoT~EmSrF_a@fLkf@bN}NhEcGlAiNfC{ZtE_ZhCS@ib@xD_XnCgc@xDwj@lF_DT{WrCcRtBeBOmRfBgRlBeMjAgX|CaP|AuKnAiVjBiw@dHmSrB}]xD_YtB}WfCwx@zHkQrAaOlAyPt@}NZ}JAeM@cJ]oDEyKUuE^kHv@mi@AuA@wNJ_m@~A}Rx@qw@jEg`@hC}e@nCmRt@aZdBe]lBiMv@m[vAqQjAyS`AcTnAsUbAsTfAw\\nAsXVgOb@eb@`@o^~@gUl@qb@nAmh@n@yXf@iLHgL?_GLwXx@{Z^g_Ax@sg@`Bib@p@{OY}jALmW^g\\WqMOmOSc^m@a]eAyZ}@oFOsJWgJa@yDc@{Ng@gPw@gd@kC}u@sCck@sCqp@qDCfBe@lIwV}AaPeAa\\kBwIe@a`@iBmYyAsZ_ByPiAyKgAa]wBqZoAaj@sC_]}BoRaAoIY"
+    ],
+    "routeSource": "VALHALLA_OSM_BICYCLE",
+    "sourceAttribution": "© OpenStreetMap contributors; routed by Valhalla"
+  }
+]

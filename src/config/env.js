@@ -8,6 +8,11 @@ if (missing.length) {
   process.exit(1);
 }
 
+const territoryLoopClosureMeters = Number(process.env.TERRITORY_LOOP_CLOSURE_METERS || 35);
+if (!Number.isFinite(territoryLoopClosureMeters) || territoryLoopClosureMeters < 5 || territoryLoopClosureMeters > 200) {
+  throw new Error('TERRITORY_LOOP_CLOSURE_METERS doit etre compris entre 5 et 200 metres');
+}
+
 module.exports = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   PORT: Number(process.env.PORT) || 5000,
@@ -17,4 +22,5 @@ module.exports = {
   CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
   GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
   GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY || '',
+  TERRITORY_LOOP_CLOSURE_METERS: territoryLoopClosureMeters,
 };

@@ -1,13 +1,14 @@
 const env = require('../config/env');
 const ApiError = require('../utils/ApiError');
 const asyncHandler = require('../utils/asyncHandler');
+const { snapCoordinates } = require('../services/googleRoadsService');
 
 // Proxy de Google Static Maps : la cle Google ne quitte jamais le serveur.
-// Le front utilise : GET /api/maps/static?center=48.85,2.36&zoom=15&markers=48.85,2.36
+// Le front utilise : GET /api/maps/static?center=34.7398,10.7603&zoom=15
 exports.staticMap = asyncHandler(async (req, res) => {
   if (!env.GOOGLE_MAPS_API_KEY) throw new ApiError(503, 'Google Maps non configure sur le serveur');
 
-  const { center = '48.8530,2.3698', zoom = '14', width = '600', height = '360', markers, path } = req.query;
+  const { center = '34.7398,10.7603', zoom = '14', width = '600', height = '360', markers, path } = req.query;
   const w = Math.min(Number(width) || 600, 640);
   const h = Math.min(Number(height) || 360, 640);
 
@@ -38,4 +39,9 @@ exports.staticMap = asyncHandler(async (req, res) => {
   res.set('Content-Type', upstream.headers.get('content-type') || 'image/png');
   res.set('Cache-Control', 'public, max-age=86400');
   res.send(Buffer.from(await upstream.arrayBuffer()));
+});
+
+exports.snapToRoads = asyncHandler(async (req, res) => {
+  const result = await snapCoordinates(req.body.coordinates, req.body.closeLoop === true);
+  res.json({ success: true, ...result });
 });

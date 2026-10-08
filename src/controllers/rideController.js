@@ -3,6 +3,14 @@ const Territory = require('../models/Territory');
 const ApiError = require('../utils/ApiError');
 const asyncHandler = require('../utils/asyncHandler');
 const { applyXp } = require('../utils/xp');
+const TerritoryTrackingSession = require('../models/TerritoryTrackingSession');
+const TerritoryConquest = require('../models/TerritoryConquest');
+const { coversRoute } = require('../utils/geo');
+const { applyTerritoryConquest } = require('../utils/territoryConquest');
+const { serializeTerritory } = require('../utils/serializeTerritory');
+const { buildRoadSegments } = require('../utils/roadSegments');
+
+const ROAD_ROUTE_SOURCES = ['GPS_MAP_MATCHED', 'VALHALLA_OSM_BICYCLE'];
 
 // "29:45" -> secondes ; "≤ 31:00" -> 1860 ; "N/A" -> null
 const parseTime = (str) => {
@@ -16,8 +24,33 @@ exports.createRide = asyncHandler(async (req, res) => {
 
   let territory = null;
   if (b.territoryId) {
-    territory = await Territory.findOne({ slug: b.territoryId }).catch(() => null);
+    territory = await Territory.findOne({
+      slug: b.territoryId,
+      routeSource: { $in: ROAD_ROUTE_SOURCES },
+      routeCoordinates: { $exists: true, $ne: [] },
+    });
     if (!territory) throw new ApiError(404, 'Territoire introuvable');
+  }
+
+  let trackingSession = null;
+  if (territory && b.mode === 'CONQUEST') {
+    if (!b.trackingId) throw new ApiError(422, 'Une session GPS de conquete terminee est requise');
+    trackingSession = await TerritoryTrackingSession.findOne({
+      _id: b.trackingId,
+      user: user._id,
+      purpose: 'CONQUEST',
+      status: 'COMPLETE',
+    });
+    if (!trackingSession) {
+      throw new ApiError(422, 'Une session GPS de conquete terminee est requise');
+    }
+    if (!trackingSession.loopClosed) {
+      throw new ApiError(422, 'La boucle GPS doit etre fermee avant de valider la conquete');
+    }
+    const territoryRoute = territory.routeCoordinates;
+    if (!coversRoute(trackingSession.coordinates, territoryRoute)) {
+      throw new ApiError(422, 'Le parcours GPS ne couvre pas entierement les segments routiers du territoire');
+    }
   }
 
   const hours = b.durationSec / 3600;
@@ -57,20 +90,47 @@ exports.createRide = asyncHandler(async (req, res) => {
   user.stats.totalElevationM += b.elevationM || 0;
   user.stats.bestPower5s = Math.max(user.stats.bestPower5s, b.maxPowerW || 0);
 
-  // Mode conquete : on fait progresser le controle de la zone
+  // Mode conquete : le serveur ne progresse le controle qu'apres validation de la trace GPS.
   let territoryResult = null;
   if (territory && b.mode === 'CONQUEST') {
-    const wasMine = String(territory.owner) === String(user._id);
-    territory.controlPercent = Math.min(100, territory.controlPercent + 20);
-    if (!wasMine && territory.controlPercent >= 50) {
-      territory.owner = user._id;
-      territory.ownerName = user.username;
-      territory.status = 'SECURED';
-      territory.color = 'lime';
-      user.stats.zonesSecured += 1;
-    }
+    const outcome = applyTerritoryConquest(territory, user);
+    if (outcome.captured) user.stats.zonesSecured += 1;
+    const territoryRoute = territory.routeCoordinates;
+    territory.segments = buildRoadSegments(territoryRoute, user, user.username);
     await territory.save();
-    territoryResult = territory;
+    await TerritoryConquest.create({
+      user: user._id,
+      territory: territory._id,
+      trackingSession: trackingSession._id,
+      ride: ride._id,
+      startTime: trackingSession.startTime,
+      endTime: trackingSession.endTime,
+      distanceKm: trackingSession.distanceKm,
+      loopClosed: trackingSession.loopClosed,
+      areaPolygon: territory.areaPolygon || [],
+      segmentsCaptured: territory.segments.length,
+      coordinates: trackingSession.coordinates,
+      segments: territory.segments,
+      previousOwner: outcome.previousOwner,
+      newOwner: user._id,
+      color: outcome.ownerColor,
+      status: outcome.status,
+    });
+    trackingSession.status = 'CONSUMED';
+    await trackingSession.save();
+    territoryResult = {
+      territoryId: territory.slug,
+      territoryName: territory.name,
+      ...outcome,
+      previousOwner: outcome.previousOwner ? String(outcome.previousOwner) : null,
+      newOwner: String(user._id),
+      defenseLevel: territory.defenseLevel,
+      status: territory.status,
+      rewardXp: territory.rewardXp,
+      isMine: String(territory.owner) === String(user._id),
+      ownerColor: serializeTerritory(territory, user).ownerColor,
+      segmentsCaptured: territory.segments.length,
+    };
   }
 
   await user.save();
@@ -80,7 +140,8 @@ exports.createRide = asyncHandler(async (req, res) => {
     ride,
     progress: { ...progress, leveledUp: user.level > before },
     user,
-    territory: territoryResult,
+    territory: territoryResult ? serializeTerritory(territory, user) : null,
+    territoryConquest: territoryResult,
   });
 });
 

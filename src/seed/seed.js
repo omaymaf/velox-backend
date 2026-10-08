@@ -10,13 +10,14 @@ const Territory = require('../models/Territory');
 const Poi = require('../models/Poi');
 const PoiVisit = require('../models/PoiVisit');
 const Post = require('../models/Post');
-
-const territories = [
-  { slug: 'bastille-4', tacticalId: 'SEC-04B', name: 'Zone: Bastille Sector 4', shortName: 'BASTILLE SECTOR 4', status: 'CONTESTED', ownerName: 'Marc_Sprint', areaKm2: 2.8, defenseLevel: 'Lvl 4 Shield', rewardXp: 250, controlPercent: 64, color: 'magenta', center: { label: 'Place de la Bastille, Paris', lat: 48.853, lng: 2.3698 } },
-  { slug: 'republique-02', tacticalId: 'SEC-02D', name: 'Zone: République D-02', shortName: 'REPUBLIQUE D-02', status: 'SECURED', ownerName: 'Alex_Velox', areaKm2: 5.4, defenseLevel: 'Lvl 5 Bastion', rewardXp: 180, controlPercent: 98, color: 'lime', center: { label: 'Place de la République, Paris', lat: 48.8675, lng: 2.3638 }, _ownerIsDemo: true },
-  { slug: 'marais-01', tacticalId: 'SEC-01S', name: 'Zone: Marais S-01', shortName: 'MARAIS S-01', status: 'SECURED', ownerName: 'Alex_Velox', areaKm2: 4.2, defenseLevel: 'Lvl 6 Fortress', rewardXp: 150, controlPercent: 100, color: 'cyan', center: { label: 'Le Marais, Paris', lat: 48.8575, lng: 2.358 }, _ownerIsDemo: true },
-  { slug: 'neutral-12', tacticalId: 'SEC-12N', name: 'Zone: Neutral Sector 12', shortName: 'NEUTRAL SECTOR 12', status: 'NEUTRAL', ownerName: 'Unclaimed', areaKm2: 3.1, defenseLevel: 'No Shield', rewardXp: 300, controlPercent: 0, color: 'neutral', center: { label: 'Gare de Lyon, Paris', lat: 48.846, lng: 2.378 } },
-];
+const TerritoryConquest = require('../models/TerritoryConquest');
+const TerritoryColorSequence = require('../models/TerritoryColorSequence');
+const { routeMetrics, routeLengthKm, distanceMeters } = require('../utils/geo');
+const { getUserColor } = require('../utils/userColor');
+const { decodePolyline6 } = require('../utils/polyline');
+const { buildRoadSegments } = require('../utils/roadSegments');
+const { buildAreaPolygon } = require('../utils/loopGeometry');
+const sfaxTerritories = require('./sfaxTerritories.json');
 
 const pois = [
   { slug: 'pont-neuf', name: 'Pont Neuf Arch', category: 'Target Landmark', distanceMeters: 350, xpReward: 50, isTarget: true, corridorHint: 'Follow glowing cyan corridor via Quai des Orfèvres', coords: { top: '480px', left: '225px' }, location: { lat: 48.8570, lng: 2.3413 } },
@@ -29,7 +30,7 @@ async function run() {
   await connectDB();
 
   if (process.argv.includes('--reset')) {
-    await Promise.all([User.deleteMany(), Ride.deleteMany(), Territory.deleteMany(), Poi.deleteMany(), PoiVisit.deleteMany(), Post.deleteMany()]);
+    await Promise.all([User.deleteMany(), Ride.deleteMany(), Territory.deleteMany(), TerritoryConquest.deleteMany(), TerritoryColorSequence.deleteMany(), Poi.deleteMany(), PoiVisit.deleteMany(), Post.deleteMany()]);
     console.log('[seed] Collections videes');
   }
 
@@ -37,6 +38,7 @@ async function run() {
   const ensureUser = async (data) => {
     let u = await User.findOne({ email: data.email });
     if (!u) u = await User.create(data);
+    else if (!u.territoryColor) await u.save();
     return u;
   };
 
@@ -55,10 +57,71 @@ async function run() {
   const thomas = await ensureUser({ username: 'Thomas_V', email: 'thomas@velox.app', password: 'velox1234', displayName: 'Thomas', xp: 5200, level: 30 });
   const marc = await ensureUser({ username: 'Marc_Sprint', email: 'marc@velox.app', password: 'velox1234', displayName: 'Marc', xp: 900, level: 12 });
 
-  for (const t of territories) {
-    const { _ownerIsDemo, ...data } = t;
-    const owner = _ownerIsDemo ? alex._id : data.ownerName === 'Marc_Sprint' ? marc._id : null;
-    await Territory.findOneAndUpdate({ slug: data.slug }, { ...data, owner }, { upsert: true, new: true });
+  // Retire uniquement les anciens territoires fictifs qui plaçaient la carte à Paris.
+  await Territory.deleteMany({
+    slug: { $in: ['bastille-4', 'republique-02', 'marais-01', 'neutral-12'] },
+  });
+
+  const demoUsersByEmail = new Map(
+    [alex, clara, thomas, marc].map((user) => [user.email, user]),
+  );
+  for (const sample of sfaxTerritories) {
+    const route = sample.polylines.flatMap((encoded, index) =>
+      decodePolyline6(encoded).slice(index === 0 ? 0 : 1),
+    );
+    if (sample.routeSource !== 'VALHALLA_OSM_BICYCLE') {
+      throw new Error(`La route de demonstration ${sample.slug} n'a pas de source de routage verifiable`);
+    }
+    if (route.length < 4 || distanceMeters(route[0], route[route.length - 1]) > 25) {
+      throw new Error(`La boucle routiere de demonstration ${sample.slug} n'est pas fermee`);
+    }
+    route[route.length - 1] = [...route[0]];
+    const metrics = routeMetrics(route);
+    const area = buildAreaPolygon(route);
+    if (!area) throw new Error(`Le contour routier ferme de ${sample.slug} ne definit pas une surface valide`);
+    const owner = sample.ownerEmail ? demoUsersByEmail.get(sample.ownerEmail) : null;
+    const creator = demoUsersByEmail.get(sample.creatorEmail);
+    if (!creator || (sample.ownerEmail && !owner)) {
+      throw new Error(`Compte de demonstration manquant pour ${sample.slug}`);
+    }
+    await Territory.findOneAndUpdate(
+      { slug: sample.slug },
+      {
+        slug: sample.slug,
+        tacticalId: `SFX-${sample.slug.slice(-3).toUpperCase()}`,
+        name: sample.name,
+        shortName: sample.name.toUpperCase().slice(0, 24),
+        creator: creator._id,
+        creatorName: creator.username,
+        owner: owner?._id || null,
+        ownerName: owner?.username || 'Unclaimed',
+        challenger: null,
+        challengerControlPercent: 0,
+        status: sample.status,
+        controlPercent: sample.controlPercent,
+        areaKm2: area.areaKm2,
+        isClosedLoop: true,
+        areaPolygon: area.areaPolygon,
+        perimeterKm: metrics.perimeterKm,
+        defenseLevel: sample.defenseLevel,
+        rewardXp: sample.rewardXp,
+        color: owner ? getUserColor(owner._id, owner.territoryColor) : '#87909b',
+        routeSource: sample.routeSource,
+        routeCoordinates: route,
+        segments: buildRoadSegments(route, owner, owner?.username || 'Unclaimed'),
+        startPoint: { lat: route[0][0], lng: route[0][1] },
+        distanceKm: Number(routeLengthKm(route).toFixed(2)),
+        durationSec: 0,
+        gpsUncertain: false,
+        conquestCount: 0,
+        center: {
+          label: sample.name,
+          lat: metrics.center.lat,
+          lng: metrics.center.lng,
+        },
+      },
+      { upsert: true, new: true, runValidators: true },
+    );
   }
   for (const p of pois) await Poi.findOneAndUpdate({ slug: p.slug }, p, { upsert: true, new: true });
 
@@ -70,7 +133,8 @@ async function run() {
     ]);
   }
 
-  console.log('[seed] Termine. Comptes de demo : alex@velox.app / clara@velox.app / thomas@velox.app / marc@velox.app  (mot de passe : velox1234)');
+  console.log('[seed] 4 boucles cyclables routées par Valhalla sur OpenStreetMap chargées à Sfax (2 conquises, 2 neutres).');
+  console.log('[seed] Comptes de demo : alex@velox.app / clara@velox.app / thomas@velox.app / marc@velox.app  (mot de passe : velox1234)');
   await mongoose.disconnect();
 }
 

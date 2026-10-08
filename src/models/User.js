@@ -1,6 +1,8 @@
 // models/User.js
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const { getUserColor, PALETTE } = require("../utils/userColor");
+const { assignTerritoryColor } = require("../utils/assignTerritoryColor");
 
 const hardwareSchema = new mongoose.Schema(
   { name: String, status: String },
@@ -27,6 +29,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: false, minlength: 6, select: false },
     googleId: { type: String, unique: true, sparse: true },
     displayName: { type: String, trim: true, default: "" },
+    territoryColor: { type: String, enum: PALETTE, default: null },
     avatarUrl: { type: String, default: "" },
     age: { type: Number, min: 10, max: 100, default: null },
     sex: {
@@ -52,8 +55,10 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password") || !this.password) return next();
-  this.password = await bcrypt.hash(this.password, 12);
+  if (!this.territoryColor) this.territoryColor = await assignTerritoryColor();
+  if (this.isModified("password") && this.password) {
+    this.password = await bcrypt.hash(this.password, 12);
+  }
   next();
 });
 
@@ -65,6 +70,7 @@ userSchema.set("toJSON", {
   transform: (_doc, ret) => {
     delete ret.password;
     delete ret.__v;
+    ret.color = getUserColor(ret._id, ret.territoryColor);
     return ret;
   },
 });
